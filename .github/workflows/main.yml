@@ -31,7 +31,7 @@ jobs:
         run: mvn clean package
 
       - name: Set up OpenShift CLI
-        uses: redhat-actions/oc-login@v2
+        uses: redhat-actions/oc-login@v1
         with:
           openshift_server: https://api.rm2.thpm.p1.openshiftapps.com:6443
           token: sha256~gyKB_jOtMxtuO8CnoI7g6FTgEQmD96kMufR_5qEjfPE
