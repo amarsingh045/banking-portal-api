@@ -36,7 +36,7 @@ jobs:
       - name: Set up OpenShift CLI
         uses: redhat-actions/oc-login@v1
         with:
-          openshift_server: https://api.rm2.thpm.p1.openshiftapps.com:6443
+          openshift_server_url: https://api.rm2.thpm.p1.openshiftapps.com:6443
           token: sha256~gyKB_jOtMxtuO8CnoI7g6FTgEQmD96kMufR_5qEjfPE
 
       - name: Deploy to OpenShift
