@@ -33,12 +33,12 @@ jobs:
       - name: Set up OpenShift CLI
         uses: redhat-actions/oc-login@v2
         with:
-          openshift_server: ${{secrets.OPENSHIFT_SERVER}
-          token: ${{secrets.OPENSHIFT_TOKEN}}
+          openshift_server: https://api.rm2.thpm.p1.openshiftapps.com:6443
+          token: sha256~gyKB_jOtMxtuO8CnoI7g6FTgEQmD96kMufR_5qEjfPE
 
       - name: Deploy to OpenShift
         run:
-          oc project ${{}}
+          oc project banking-portal-api
           oc new-app --name=banking-portal-api --image-stream=java:17 --binary=true
           oc start-build banking-portal-api --from-file=target/banking-portal-api-0.0.1-SNAPSHOT.jar --follow
           oc expose svc/banking-portal-api
