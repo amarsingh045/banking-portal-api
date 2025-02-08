@@ -23,7 +23,7 @@ jobs:
           distribution: 'adopt'
 
       - name: Set up Maven
-        uses: actions/setup-java@v3
+        uses: actions/setup-maven-action@v3
         with:
           distribution: 'maven'
           maven-version: '3.8.4'
