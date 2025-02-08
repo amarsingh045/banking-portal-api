@@ -1,0 +1,44 @@
+name: Build and Deploy to OpenShift
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+
+      - name: Set up Maven
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'maven'
+          maven-version: '3.8.4'
+
+      - name: Build with Maven
+        run: mvn clean package
+
+      - name: Set up OpenShift CLI
+        uses: redhat-actions/oc-login@v2
+        with:
+          openshift_server: ${{secrets.OPENSHIFT_SERVER}
+          token: ${{secrets.OPENSHIFT_TOKEN}}
+
+      - name: Deploy to OpenShift
+        run:
+          oc project ${{}}
+          oc new-app --name=banking-portal-api --image-stream=java:17 --binary=true
+          oc start-build banking-portal-api --from-file=target/banking-portal-api-0.0.1-SNAPSHOT.jar --follow
+          oc expose svc/banking-portal-api
