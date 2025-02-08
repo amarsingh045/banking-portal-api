@@ -47,7 +47,6 @@ jobs:
       - name: Deploy to OpenShift
         run:
           oc project banking-portal-api
-          #oc new-app --name=banking-portal-api --image-stream=java:17 --binary=true
           oc new-app --image-stream=java:17 --binary=true
           oc start-build banking-portal-api --from-file=target/banking-portal-api-0.0.1-SNAPSHOT.jar --follow
           oc expose svc/banking-portal-api
